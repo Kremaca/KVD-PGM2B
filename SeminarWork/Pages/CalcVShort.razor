@@ -1,0 +1,47 @@
+﻿@page "/calcshort"
+
+<PageTitle>Calculator Short</PageTitle>
+
+<h1>Calculator Short</h1>
+
+<hr>
+
+<label>První hodnota: <input @bind="first_num"/></label><br>
+<label>Druhá hodnota: <input @bind="second_num"/></label><br>
+
+<hr>
+
+<button class="btn btn-primary" @onclick="Add">Add</button>
+<button class="btn btn-primary" @onclick="Subtract">Subtract</button>
+<button class="btn btn-primary" @onclick="Multiply">Multiply</button>
+<button class="btn btn-primary" @onclick="Divide">Divide</button>
+
+<hr>
+
+<span>Result: @currentNum</span>
+
+@code {
+    private short currentNum = 0;
+    private short first_num;
+    private double second_num;
+
+    private void Add()
+    {
+        currentNum = (short) (first_num + second_num);
+    }
+
+    private void Subtract()
+    {
+        currentNum = (short) (first_num - second_num);
+    }
+
+    private void Multiply()
+    {
+        currentNum = (short) (first_num * second_num);
+    }
+
+    private void Divide()
+    {
+        currentNum = (short) (first_num / second_num);
+    }
+}

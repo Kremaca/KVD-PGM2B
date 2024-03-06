@@ -1,0 +1,47 @@
+﻿@page "/calc"
+
+<PageTitle>Calculator</PageTitle>
+
+<h1>Calculator</h1>
+
+<hr>
+
+<label>První hodnota: <input @bind="first_num"/></label><br>
+<label>Druhá hodnota: <input @bind="second_num"/></label><br>
+
+<hr>
+
+<button class="btn btn-primary" @onclick="Add">Add</button>
+<button class="btn btn-primary" @onclick="Subtract">Subtract</button>
+<button class="btn btn-primary" @onclick="Multiply">Multiply</button>
+<button class="btn btn-primary" @onclick="Divide">Divide</button>
+
+<hr>
+
+<span>Result: @currentNum</span>
+
+@code {
+    private double currentNum = 0;
+    private double first_num;
+    private double second_num;
+
+    private void Add()
+    {
+        currentNum = first_num + second_num;
+    }
+
+    private void Subtract()
+    {
+        currentNum = first_num - second_num;
+    }
+
+    private void Multiply()
+    {
+        currentNum = first_num * second_num;
+    }
+
+    private void Divide()
+    {
+        currentNum = first_num / second_num;
+    }
+}
