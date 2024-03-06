@@ -1,0 +1,18 @@
+﻿@page "/rectangleNew"
+
+<PageTitle>New Rectangle Calculator</PageTitle>
+
+<h1>Rectangle New</h1>
+
+<label>Side A: <input type="number" @bind-value="rectangleNew.SideA"></label><br>
+<label>Side B: <input type="number" @bind-value="rectangleNew.SideB"></label>
+
+<hr>
+
+<span>Circumference: @rectangleNew.Circumference</span><br>
+<span>Area: @rectangleNew.Area</span><br>
+<span>Diagonal: @rectangleNew.Diagonal</span>
+
+@code {
+    private Classes.RectangleNew rectangleNew = new Classes.RectangleNew();
+}

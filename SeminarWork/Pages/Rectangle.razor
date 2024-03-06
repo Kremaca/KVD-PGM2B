@@ -1,0 +1,22 @@
+﻿@page "/rectangle"
+
+<PageTitle>Rectangle Calculator</PageTitle>
+
+<h1>Rectangle</h1>
+
+<label>Side A: <input type="number" @bind-value="rectangle.SideA"></label><br>
+<label>Side B: <input type="number" @bind-value="rectangle.SideB"></label>
+
+<hr>
+
+<button class="btn btn-primary" @onclick="rectangle.CalcAll">Calculate All</button>
+
+<hr>
+
+<span>Circumference: @rectangle.Circumference</span><br>
+<span>Area: @rectangle.Area</span><br>
+<span>Diagonal: @rectangle.Diagonal</span>
+
+@code {
+    private Classes.Rectangle rectangle = new Classes.Rectangle();
+}
