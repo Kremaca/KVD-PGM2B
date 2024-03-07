@@ -2,7 +2,19 @@
 {
     public class Record
     {
-        public DateOnly Date { get; set; }
+        public Record() 
+        {
+            Date = DateOnly.FromDateTime(DateTime.Now);
+        }
+
+        public Record(DateOnly date, double expense, double produce) 
+        {
+            Date = date;
+            Expense = expense;
+            Produce = produce;
+        }
+
+        public DateOnly Date { get; set; } // DateOnly.FromDateTime(DateTime.Now);
         private double expense;
 
         public double Expense
@@ -21,5 +33,9 @@
 
         public double Gain => Produce - Expense;
 
+        public override string ToString()
+        {
+            return $"Date: {Date} - Expense: {Expense} - Produce: {Produce}";
+        }
     }
 }

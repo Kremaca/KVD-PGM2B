@@ -5,22 +5,22 @@
 <h1>Records</h1>
 
 <div class="border p-2 my-2">
-    <label>Date: <input type="date" /></label>
-    <label>Expenses: <input type="number" /></label>
-    <label>Produces: <input type="number" /></label>
-    <button class="btn btn-primary">Add</button>
+    <label>Date: <input type="date" @bind-value="Inventory.Record.Date"/></label>
+    <label>Expenses: <input type="number" @bind-value="Inventory.Record.Expense" /></label>
+    <label>Produces: <input type="number" @bind-value="Inventory.Record.Produce" /></label>
+    <button class="btn btn-primary" @onclick="Inventory.AddToCatalogue">Add</button>
 </div>
 
 <div class="border p-2 my-2">
-    <button class="btn btn-info">Show all</button>
-    <button class="btn btn-info">Number of records</button>
+    <button class="btn btn-info" @onclick="Inventory.ShowAllRecords">Show all</button>
+    <button class="btn btn-info" @onclick="Inventory.NumberOfRecords">Number of records</button>
     <button class="btn btn-info">Statistics</button>
 </div>
 
 <div class="border p-0 my-2">
-    <p></p>
+    <p>@((MarkupString)Inventory.RecordsPrint)</p>
 </div>
 
 @code {
-
+    private Classes.Inventory Inventory { get; set; } = new Classes.Inventory();
 }
