@@ -1,4 +1,5 @@
-﻿@page "/records"
+﻿@inject IJSRuntime js
+@page "/records"
 
 <PageTitle>Records</PageTitle>
 
@@ -8,19 +9,68 @@
     <label>Date: <input type="date" @bind-value="Inventory.Record.Date"/></label>
     <label>Expenses: <input type="number" @bind-value="Inventory.Record.Expense" /></label>
     <label>Produces: <input type="number" @bind-value="Inventory.Record.Produce" /></label>
-    <button class="btn btn-primary" @onclick="Inventory.AddToCatalogue">Add</button>
+    @if (!Inventory.UpdateMode)
+    {
+        <button class="btn btn-primary mx-2" @onclick="Inventory.AddToCatalogue">Add</button>
+    }
 </div>
 
 <div class="border p-2 my-2">
     <button class="btn btn-info" @onclick="Inventory.ShowAllRecords">Show all</button>
     <button class="btn btn-info" @onclick="Inventory.NumberOfRecords">Number of records</button>
-    <button class="btn btn-info">Statistics</button>
+    <button class="btn btn-info" @onclick="Inventory.ShowStatistics">Statistics</button>
 </div>
 
 <div class="border p-0 my-2">
     <p>@((MarkupString)Inventory.RecordsPrint)</p>
 </div>
 
+@if (!Inventory.Catalogue.Any())
+{
+    <p class="fw-bold">No records are currently present</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Expense</th>
+                <th>Produce</th>
+                <th>Gain</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var record in Inventory.Catalogue)
+            {
+                <tr>
+                    <td>@record.Date</td>
+                    <td>@record.Expense.ToString("C")</td>
+                    <td>@record.Produce.ToString("C")</td>
+                    <td>@record.Gain.ToString("C")</td>
+                    <td><button class="btn btn-danger fw-bold fs-5" @onclick="() => Inventory.RecordDelete(record)">×</button></td>
+                    <td><button class="btn btn-warning fw-bold fs-5" @onclick="() => Inventory.RecordUpdate(record)">±</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 @code {
-    private Classes.Inventory Inventory { get; set; } = new Classes.Inventory();
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Inventory = new Classes.Inventory(js);
+    }
+
+    private Classes.Inventory Inventory { get; set; }
+
+    // private async Task RecordDelete(Classes.Record record)
+    // {
+    //     var notice = $"Do you want to delete this record? \nDate: {record.Date} - Gain: {record.Gain}";
+    //     if (await js.InvokeAsync<bool>("confirm", notice)) Inventory.Catalogue.Remove(record);
+    //     //js.InvokeVoidAsync("alert", notice);
+    // }
 }
